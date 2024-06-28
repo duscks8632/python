@@ -1,16 +1,19 @@
-data = input()
-# 초기 누적값을 result로
-result = int(data[0])
+people_count = int(input())
+scared_numbers = list(map(int, input().split()))
+# 리스트를 정렬
+scared_numbers.sort()
 
-# 왼쪽부터 차례로 하나씩 연산실행 ( 더하기 먼저 안함 )
-for i in range(1, len(data)):
-    # 각자리 숫자는 num으로 세팅
-    num = int(data[i])
-    # 둘 중 하나라도 0이거나 1 이면 더하기
-    if result <= 1 or num <= 1:
-        result += num
-    else:
-        result *= num
+result = 0 # 총 모험가 그룹 수
+count = 0 # 현 그룹에 있는 모험가 수
+
+for i in scared_numbers:
+    count += 1 # 현 그룹에 모험가가 추가된다.
+    if count >= i: # 현 그룹 모험가수가 현재 공포도보다 크다면 그룹은 완성된 그룹이므로 총 그룹수 + 1를 하고 현 그룹의 모험가수는 0으로 만든다.
+        result += 1
+        count = 0
 
 print(result)
+
+
+
 
