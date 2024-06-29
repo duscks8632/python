@@ -1,18 +1,23 @@
-people_count = int(input())
-scared_numbers = list(map(int, input().split()))
-# 리스트를 정렬
-scared_numbers.sort()
+n = int(input())
+plans = input().split()
+x , y = 1, 1
+move_types = ['L', 'R', 'U', 'D']
 
-result = 0 # 총 모험가 그룹 수
-count = 0 # 현 그룹에 있는 모험가 수
+dx = [0, 0, -1, 1]
+dy = [-1, 1, 0, 0]
 
-for i in scared_numbers:
-    count += 1 # 현 그룹에 모험가가 추가된다.
-    if count >= i: # 현 그룹 모험가수가 현재 공포도보다 크다면 그룹은 완성된 그룹이므로 총 그룹수 + 1를 하고 현 그룹의 모험가수는 0으로 만든다.
-        result += 1
-        count = 0
+for plan in plans:
+    for i in range(len(move_types)):
+        if plan == move_types[i]:
+            nx = x + dx[i]
+            ny = y + dy[i]
+    if nx < 1 or ny < 1 or nx > n or ny > n:
+        continue
+    else:
+        x = nx
+        y = ny
 
-print(result)
+print(x, y)
 
 
 
