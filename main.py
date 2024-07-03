@@ -19,7 +19,7 @@ if value != 0:
 
 # 공백없이 문자열 출력
 print(''.join(result_list))
-print('test')
+
 
 
 
