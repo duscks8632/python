@@ -1,32 +1,25 @@
-from collections import deque
-def bfs(graph, start, visited):
-	# 1번 노드를 deque에 넣음
-	queue = deque([start])
-	# 1번 노드 방문처리
-	visited[start] = True
-	# queue가 빌때까지 반복
-	while queue:
-		# 큐에 있는 맨 밑 노드 뽑기
-		v = queue.popleft()
-		print(v, end=' ')
-		for i in graph[v]:
-			# 방문 안한 인접노드만 큐에 추가하기
-			if not visited[i]:
-				queue.append(i)
-				visited[i] = True
+def dfs(a, b):
+    if a < 0 or a >= n or b < 0 or b >= m:
+        return False
+    if graph[a][b] == 0:
+        graph[a][b] = 1
+        dfs(a -1, b)
+        dfs(a + 1,b)
+        dfs(a, b - 1)
+        dfs(a, b + 1)
+        return True
+    return False
 
-graph = [
-	[],
-	[2,3,8],
-	[1,7],
-	[1,4,5],
-	[3,5],
-	[3,4],
-	[7],
-	[2,6,8],
-	[1,7]
-]
+n, m = map(int, input().split())
 
-visited = [False] * 9
+graph = []
+for i in range(n):
+    graph.append(list(map(int, input())))
 
-bfs(graph, 1, visited)
+result = 0
+for i in range(n):
+    for j in range(m):
+        if dfs(i,j) == True:
+            result += 1
+
+print(result)
