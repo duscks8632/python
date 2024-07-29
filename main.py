@@ -1,25 +1,25 @@
-def dfs(a, b):
-    if a < 0 or a >= n or b < 0 or b >= m:
-        return False
-    if graph[a][b] == 0:
-        graph[a][b] = 1
-        dfs(a -1, b)
-        dfs(a + 1,b)
-        dfs(a, b - 1)
-        dfs(a, b + 1)
-        return True
-    return False
+def merge_sort(arr):
+    if len(arr) < 2:
+        return arr
 
-n, m = map(int, input().split())
+    mid = len(arr) // 2
 
-graph = []
-for i in range(n):
-    graph.append(list(map(int, input())))
+    low_arr = merge_sort(arr[:mid])
+    high_arr = merge_sort(arr[mid:])
 
-result = 0
-for i in range(n):
-    for j in range(m):
-        if dfs(i,j) == True:
-            result += 1
+    merge_arr = []
+    l = h = 0
+    while l < len(low_arr) and h < len(high_arr):
+        if low_arr[l] < high_arr[h]:
+            merge_arr.append(low_arr[l])
+            l += 1
+        else:
+            merge_arr.append(high_arr[h])
+            h += 1
 
-print(result)
+    merge_arr += low_arr[l:]
+    merge_arr += high_arr[h:]
+
+    return merge_arr
+
+print(merge_sort([3, 1, 4, 1, 5, 9, 2, 6]))
