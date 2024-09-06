@@ -1,4 +1,4 @@
-def insert_sort(arr):
+def select_sort(arr):
     # 삽입할 놈을 선택
     for i in range(len(arr)):
         min_index = i
@@ -14,4 +14,4 @@ def insert_sort(arr):
 
 arr1 = [7,5,9,0,3,1,6,2,4,8]
 
-print(insert_sort(arr1))
+print(select_sort(arr1))
