@@ -1,31 +1,15 @@
+def quick_sort(arr):
+    # 배열이 1보다 작으면 현재 배열 리턴하면서 끝내기
+    if len(arr) <= 1:
+        return arr
+    # 피벗값은 맨 앞 값, tail를 피벗을 제외한 값
+    pivot = arr[0]
+    tail = arr[1:]
+    # 리스트 컴프리헨션을 통해 tail에 속해있는 애들 중 피벗값보다 작으면 left_side 크면 right_side이다.
+    left_side = [x for x in tail if x <= pivot]
+    right_side = [x for x in tail if x > pivot]
+    # 그렇게 선별한 배열들을 재귀함수를 호출하고 피벗값은 그들 중간에 위치시키게 배열을 조정한다.
+    return quick_sort(left_side) + [pivot] + quick_sort(right_side)
 
-
-def quick_sort(arr, start, end):
-    if start >= end:
-        return
-    pivot = start
-    left = pivot + 1
-    right = end
-    # 왼쪽, 오른쪽 인덱스 값이 같을 때까지 바꾸고 엇갈릴때, while문을 나가야하므로 left <= right 로 바꾸어야 한다.
-    while (left <= right):
-        # left 인덱스가 끝까지 검사를 해줘야 하기에 left <= end로 고쳐야 함
-        # 또한, 인덱스 값을 비교하는 게 아니라 arr값을 비교해야 함
-        while (left <= end and arr[left] < arr[pivot]):
-            left += 1
-        # start가 아니라 right여야 함
-        # 또한, 인덱스 값을 비교하는 게 아니라 arr값을 비교해야 함
-        while (right > start and arr[right] > arr[pivot]):
-            right -= 1
-        if (left > right):
-            arr[pivot], arr[right] = arr[right], arr[pivot]
-        else:
-            arr[left], arr[right] = arr[right], arr[left]
-    # quick_sort에서 right 값이 겹치면 안됨
-    # right + 1나 right -1를 해야함.
-    quick_sort(arr, start, right)
-    quick_sort(arr, right + 1, end)
-
-array = [5, 7, 9, 0, 3, 1, 6, 2, 4, 8]
-quick_sort(array, 0, len(array)-1 )
-
-print(array)
+arr1 = [3, 6 ,7, 1, 3, 4, 4, 4, 8]
+print(quick_sort(arr1))
