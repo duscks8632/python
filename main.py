@@ -1,17 +1,23 @@
-import time
-N, K  = map(int, input().split())
-
-A = list(map(int,input().split()))
-B = list(map(int,input().split()))
-start_time = time.time()
-A.sort()
-B.sort(reverse=True)
-
-for i in range(K):
-    if A[i] < B[i]:
-        A[i], B[i] = B[i], A[i]
+def binary_search(arr, tar, start, end):
+    # start 인덱스가 end 인덱스를 넘기면 끝남
+    if start > end:
+        return None
+    mid = (start + end) // 2
+    if arr[mid] == tar:
+        return mid
+    elif tar < arr[mid]:
+        end = mid - 1
     else:
-        break
-end_time = time.time()
-print(end_time - start_time)
-print(sum(A))
+        start = mid + 1
+    return binary_search(arr, tar, start, end)
+
+
+n, target = map(int, input().split())
+array = list(map(int, input().split()))
+
+result = binary_search(array, target, 0, n - 1)
+
+if result == None:
+    print("원소없음")
+else:
+    print(result + 1)
