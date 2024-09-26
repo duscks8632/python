@@ -1,23 +1,16 @@
-def binary_search(arr, tar, start, end):
-    # start 인덱스가 end 인덱스를 넘기면 끝남
-    if start > end:
-        return None
-    mid = (start + end) // 2
-    if arr[mid] == tar:
-        return mid
-    elif tar < arr[mid]:
-        end = mid - 1
-    else:
-        start = mid + 1
-    return binary_search(arr, tar, start, end)
+from bisect import bisect_left, bisect_right, bisect
 
+def count_by_range(array, left_value, right_value):
+    left_index = bisect_left(array, left_value)
+    right_index = bisect_right(array, right_value)
+    return right_index - left_index
 
-n, target = map(int, input().split())
+n, x = map(int, input().split())
 array = list(map(int, input().split()))
 
-result = binary_search(array, target, 0, n - 1)
+count = count_by_range(array, x, x)
 
-if result == None:
-    print("원소없음")
+if count == 0:
+    print(-1)
 else:
-    print(result + 1)
+    print(count)
